@@ -125,7 +125,8 @@ if ($r['devicemodel'] == "iOS")
     $sandboxCertificate = '/usr/local/apns/apns-dev.pem';
 	$sandboxSsl = 'ssl://gateway.sandbox.push.apple.com:2195';
     #$sandboxFeedback = 'ssl://feedback.sandbox.push.apple.com:2196';
-    $message = '{"aps":{"clientid":"null","alert":"'.$body.'"},"acme2":["bang","whiz"]}';
+#    $message = '{"aps":{"clientid":"null","alert":"'.$body.'"},"acme2":["bang","whiz"]}';
+    $message = '{"aps":{"clientid":"null","alert":"'.$body.'"},"jid":"'.$from.'"}';
     $token = $r['devicetoken'];
     print($token);
     print_r($message);
