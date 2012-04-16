@@ -89,6 +89,11 @@ function model($to)
     return $row;
 }
 
+#$myFile = "/home/pavel/workspace/pushmessage.log";
+#$fh = fopen($myFile, 'aw');
+#$stringData = "Start\n";
+#$time = date('H:i:s');
+#fwrite($fh, "$time $stringData");
 
 $config = parse_ini_file("config", true);
 print_r($config);
@@ -99,12 +104,15 @@ if (!empty($params))
     $from = $params['from'];
     $to = $params['to'];
     $body = $params['body'];
+#    fwrite($fh, "$from $to $body\n");
 }
 else
 {
     echo "No arguments.";
     break;
 }
+
+#fclose($fh);
 
 // AUTOLOAD CLASS OBJECTS... YOU CAN USE INCLUDES IF YOU PREFER
 if(!function_exists("__autoload"))
@@ -126,7 +134,7 @@ if ($r['devicemodel'] == "iOS")
 	$sandboxSsl = 'ssl://gateway.sandbox.push.apple.com:2195';
     #$sandboxFeedback = 'ssl://feedback.sandbox.push.apple.com:2196';
 #    $message = '{"aps":{"clientid":"null","alert":"'.$body.'"},"acme2":["bang","whiz"]}';
-    $message = '{"aps":{"clientid":"null","alert":"'.$body.'"},"jid":"'.$from.'"}';
+    $message = '{"aps":{"clientid":"null","alert":"'.$body.'", "sound":"chime"},"jid":"'.$from.'"}';
     $token = $r['devicetoken'];
     print($token);
     print_r($message);
@@ -159,7 +167,7 @@ else
     $collapseKey = "storedmessages";
     $mes = date("H:i:s");
     print($mes."<br>");
-    $data = array('data.message'=>$body); //The content of the message
+    $data = array('data.message'=>$body, 'data.jid'=>$from); //The content of the message
     print_r($data);
     print("<br>");
 
