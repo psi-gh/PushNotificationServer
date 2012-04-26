@@ -31,7 +31,14 @@ if(!function_exists("__autoload")){
 	}
 }
 
-$db = new DbConnect('localhost', 'pavel', '5555', 'apns_talk');
+$config = parse_ini_file("config", true);
+print_r($config);
+$address = $config['DATABASE']['address'];
+$login = $config['DATABASE']['login'];
+$pas = $config['DATABASE']['password'];
+$dbname = $config['DATABASE']['db_name'];
+
+$db = new DbConnect($address, $login, $pas, $dbname);
 $db->show_errors();
 
 $jid = $db->prepare($jid);

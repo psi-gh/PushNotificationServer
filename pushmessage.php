@@ -76,10 +76,10 @@ function registration_android($email, $password)
         return $auth_token;
 }
 
-function model($to)
+function model($to, $address, $login, $pas, $dbname)
 {
     // CREATE DATABASE OBJECT ( MAKE SURE TO CHANGE LOGIN INFO IN CLASS FILE )
-    $db = new DbConnect('localhost', 'pavel', '5555', 'apns_talk');
+    $db = new DbConnect($address, $login, $pas, $dbname);
     $db->show_errors();
     $sql = "SELECT * FROM `apns_devices` WHERE `jid`='{$to}'";
     print($sql.'<br>');
@@ -123,7 +123,11 @@ if(!function_exists("__autoload"))
 	}
 }
 
-$r = model($to);
+$address = $config['DATABASE']['address'];
+$login = $config['DATABASE']['login'];
+$pas = $config['DATABASE']['password'];
+$dbname = $config['DATABASE']['db_name'];
+$r = model($to, $address, $login, $pas, $dbname);
 print_r($r);
 print("<br>");
 
