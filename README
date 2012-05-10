@@ -12,9 +12,14 @@ II. Установка
 
 1. Требования:
 - Apache 2.2.17 (версия не так важна)
+sudo apt-get install apache2
 - PHP 5.3.5 
+sudo apt-get install php5 libapache2-mod-php5
 - MySql 5.1.61
-2. Установить таблицы для MySql из файла apns_talk.sql 
+sudo apt-get install mysql-server mysql-client
+- моды для PHP
+sudo apt-get install php5-mysql php5-curl
+2. Создать базу данных и создать таблицы из файла apns_talk.sql
 3. В директории с сайтами Apache создать папку apns_talk и скопировать в нее содержимое репозитария.
 4. По пути /usr/local/apns/ разместить сертификаты Apple (то есть, файл apns-dev.pem)
 5. В config прописать аккаунт google для получения сертификата
